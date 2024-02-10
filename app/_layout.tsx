@@ -1,11 +1,10 @@
 import { Stack } from "expo-router/stack";
-import { View, StyleSheet } from "react-native";
-import ConsoleLogComponent from "../components/testComponents/ConsoleLogComponent";
+import { UserCredentialsContext, UserCredentialsProvider } from "../components/userCredentialsComponents";
 
 export default function Layout() {
   return (
-    <ConsoleLogComponent>
+    <UserCredentialsContext.Provider value={UserCredentialsProvider()}>
       <Stack />
-    </ConsoleLogComponent>
+    </UserCredentialsContext.Provider>
   );
 }
