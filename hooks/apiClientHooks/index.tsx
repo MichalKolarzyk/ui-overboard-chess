@@ -16,5 +16,5 @@ export const useApiClient = () => {
 export interface AxiosProps{
     baseUrl: string,
     timeout: number,
-    bearerToken: string,
+    bearerToken?: string,
 }

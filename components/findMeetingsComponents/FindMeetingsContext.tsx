@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FindMeetingsResponse } from "../../apis/OverboardChessApis/models/FindMeetingsModels";
-import { useOverboardChessApi } from "../../apis/OverboardChessApis/useOverboardChessApi";
+import { FindMeetingsResponse } from "../../hooks/overboardApiHooks/models/FindMeetingsModels";
+import { useOverboardChessApi } from "../../hooks/overboardApiHooks";
 
 export class FindMeetingsState{
     meetings: Array<FindMeetingsResponse>

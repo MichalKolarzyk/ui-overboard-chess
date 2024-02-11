@@ -1,10 +1,10 @@
 import { Stack } from "expo-router/stack";
-import { UserCredentialsContext, UserCredentialsProvider } from "../components/userCredentialsComponents";
+import { SessionProvider } from "../hooks/sessionHooks";
 
 export default function Layout() {
   return (
-    <UserCredentialsContext.Provider value={UserCredentialsProvider()}>
+    <SessionProvider>
       <Stack />
-    </UserCredentialsContext.Provider>
+    </SessionProvider>
   );
 }

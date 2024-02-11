@@ -1,4 +1,4 @@
-import { FindMeetingsResponse } from "../../apis/OverboardChessApis/models/FindMeetingsModels";
+import { FindMeetingsResponse } from "../../hooks/overboardApiHooks/models/FindMeetingsModels";
 import {Text, View} from "react-native"
 
 const FindMeetingsMeeting = (props: FindMeetingsMeetingProps) => {
