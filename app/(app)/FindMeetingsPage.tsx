@@ -1,5 +1,5 @@
 import { View} from "react-native";
-import FindMeetings from "../components/findMeetingsComponents";
+import FindMeetings from "../../components/findMeetingsComponents";
 
 const FindMeetingsPage = () => {
     return <View>

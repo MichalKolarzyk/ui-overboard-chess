@@ -20,8 +20,8 @@ export const FindMeetingsProvider = () : FindMeetingsState => {
     useEffect(() => {
         const fetchMeetings = async () => {
             setIsLoading(true);
-            const newMeetings = await overboardApi.findMeetings();
-            setMeetings(newMeetings.data)
+            const meetingsResponse = await overboardApi.findMeetings();
+            setMeetings(meetingsResponse.data)
             setIsLoading(false);
         }
 

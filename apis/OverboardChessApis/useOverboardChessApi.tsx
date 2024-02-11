@@ -9,14 +9,14 @@ export const useOverboardChessApi = () =>{
     const userCredentials = useUserCredentials();
     const apiClient = useApiClient().getAxios({
         baseUrl: "https://http-overboard-chess-develop.azurewebsites.net",
-        bearerToken: userCredentials.bearerToken,
+        bearerToken: userCredentials.overboardApiToken,
         timeout: 10000,
     })
     
     const login = async (request: LoginRequest) : Promise<void> => {
         const token = await apiClient
             .post<string>("/api/user/login", request)
-            userCredentials.setBearerToken(token?.data);
+            userCredentials.setOverboardApiToken(token?.data);
     }
 
     const findMeetings = async () : Promise<AxiosResponse<FindMeetingsResponse[], any>> => {

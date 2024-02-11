@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 
 export class UserCredentialsState {
-    bearerToken: string;
-    setBearerToken: (token: string) => void
+    overboardApiToken: string;
+    setOverboardApiToken: (token: string) => void
+    isLoginToOverboardApi: () => boolean
 }
 
 export const UserCredentialsContext = React.createContext<UserCredentialsState>(new UserCredentialsState())
 
 
 export const UserCredentialsProvider = () : UserCredentialsState => {
-    const [bearerToken, setBearerToken] = useState("");
+    const [overboardApiToken, setOverboardApiToken] = useState("");
+
+    const isLoginToOverboardApi = () => {
+        return overboardApiToken != null && overboardApiToken != undefined && overboardApiToken != ""
+    }
+
     return{
-        bearerToken,
-        setBearerToken,
+        overboardApiToken,
+        setOverboardApiToken,
+        isLoginToOverboardApi
     }
 }
 
