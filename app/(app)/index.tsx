@@ -1,16 +1,12 @@
-import { Button, View} from "react-native";
+import { View} from "react-native";
 import FindMeetings from "../../components/findMeetingsComponents";
-import { useSession } from "../../hooks/sessionHooks";
+import { PageStyles } from "../../styles";
 
 const FindMeetingsPage = () => {
-    const session = useSession();
-
-    return <View>
+    return <View style={PageStyles.default}>
         <FindMeetings.Main>
             <FindMeetings.Meetings/>
         </FindMeetings.Main>
-
-        <Button title="logout" onPress={() => session.logout()}/>
     </View>
 }
 

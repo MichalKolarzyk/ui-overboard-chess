@@ -2,21 +2,21 @@ import {  useRouter } from "expo-router";
 import { View,  Button, StyleSheet } from "react-native"
 import LinkButton from "../components/baseComponents/LinkButton";
 import { useSession } from "../hooks/sessionHooks";
+import { LoginRequest } from "../hooks/sessionHooks/models/LoginRequest";
 
 
 const Home = () => {
     const session = useSession();
     const router = useRouter();
 
-    const login = async () => {
-        await session.login({username: "string", password: "string"});
+    const login = async (request: LoginRequest) => {
+        await session.login(request);
         router.replace('/');
     }
 
     return <View style={styles.container}>
-        <LinkButton title="Find meetings" href="/"/>
-        <LinkButton title="Create meeting" href="CreateMeetingPage"/>
-        <Button disabled={session.isLoading} title='Login' onPress={login}/>        
+        <Button disabled={session.isLoading} title='Login string' onPress={() => login({username: "string", password: "string"})}/>
+        <Button disabled={session.isLoading} title='Login Michal' onPress={() => login({username: "Michal", password: "Michal"})}/>
     </View>
 }
 

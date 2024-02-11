@@ -4,7 +4,8 @@ import { SessionProvider } from "../hooks/sessionHooks";
 export default function Layout() {
   return (
     <SessionProvider>
-      <Stack />
+      <Stack screenOptions={{headerShown: false}}/>
+
     </SessionProvider>
   );
 }

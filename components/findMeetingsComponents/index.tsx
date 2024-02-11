@@ -1,5 +1,5 @@
 import { FindMeetingsContext, FindMeetingsProvider, useFindMeetingsContext } from "./FindMeetingsContext"
-import {ActivityIndicator, Text} from "react-native"
+import {ActivityIndicator, Text, View} from "react-native"
 import FindMeetingsMeeting from "./FindMeetingsMeeting"
 
 const Main = (props: any) => {
@@ -13,7 +13,12 @@ const Meetings = () => {
     if(context.isLoading){
         return <ActivityIndicator size="large"/>
     }
-    return context.meetings?.map?.(m => <FindMeetingsMeeting key={m.meetingId} meeting={m}/>)
+
+    const meetingsComponent = context.meetings?.map?.(m => <FindMeetingsMeeting key={m.meetingId} meeting={m}/>)
+    return <View>
+        <Text style={{paddingHorizontal: 16}}>Find meetings</Text>
+        {meetingsComponent}
+    </View>
 }
 
 const FindMeetings = {Main, Meetings}
