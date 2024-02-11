@@ -16,7 +16,7 @@ const Home = () => {
     return <View style={styles.container}>
         <LinkButton title="Find meetings" href="/"/>
         <LinkButton title="Create meeting" href="CreateMeetingPage"/>
-        <Button  title='Login' onPress={login}/>        
+        <Button disabled={session.isLoading} title='Login' onPress={login}/>        
     </View>
 }
 
