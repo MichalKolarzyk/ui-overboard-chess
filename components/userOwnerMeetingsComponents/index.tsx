@@ -19,7 +19,7 @@ const Meetings = () => {
     return <ActivityIndicator size="large" />;
   }
 
-  const meetingsComponent = context.meetings?.map?.((m) => <Text>{m.meetingTitle}</Text>);
+  const meetingsComponent = context.meetings?.map?.((m) => <Text key={m.meetingId}>{m.meetingTitle}</Text>);
   return (
     <View>
       <Text style={{ fontSize: 25, paddingHorizontal: 5}}>Owned Meetings</Text>

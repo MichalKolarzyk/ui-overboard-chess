@@ -1,10 +1,10 @@
 import { FindMeetingsResponse } from "../../hooks/overboardApiHooks/models/FindMeetingsModels";
 import { StyleSheet, Pressable, Text, View } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const FindMeetingsMeeting = (props: FindMeetingsMeetingProps) => {
- 
-    const date = new Date(props.meeting.meetingStartDate);
-    return (
+  const date = new Date(props.meeting.meetingStartDate);
+  return (
     <Pressable
       style={({ pressed }) => [
         {
@@ -14,12 +14,32 @@ const FindMeetingsMeeting = (props: FindMeetingsMeetingProps) => {
       ]}
       onPress={() => {}}
     >
-      <View style={styles.topView}>
-        <Text>{props?.meeting?.userOwnerName}</Text>
-        <Text>{props?.meeting?.meetingTitle}</Text>
+      <View style={styles.mainView}>
+        <MaterialIcons name="location-on" size={30} color="white" />
+        <View style={{flexGrow: 1, gap: 15}}>
+          <View style={styles.topView}>
+            <View style={styles.hintInfo}>
+              <Text style={styles.hitn}>owner:</Text>
+              <Text>{props?.meeting?.userOwnerName}</Text>
+            </View>
+            <View style={styles.hintInfo}>
+              <Text style={styles.hitn}>in days:</Text>
+              <Text>
+                {date.getDate()}.0{date.getUTCMonth() + 1}.{date.getFullYear()}
+              </Text>
+            </View>
+            <View style={styles.hintInfo}>
+              <Text style={styles.hitn}>at:</Text>
+              <Text>
+                {date.getHours()}:{date.getMinutes()}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.topView}>
+            <Text style={{fontStyle: "italic"}}>{props?.meeting?.meetingTitle}</Text>
+          </View>
+        </View>
       </View>
-      <Text>{date.getDate()}.0{date.getUTCMonth()+1}.{date.getFullYear()}</Text>
-      <Text>{date.getHours()}:{date.getMinutes()}</Text>
     </Pressable>
   );
 };
@@ -29,11 +49,26 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingTop: 10,
     borderBottomColor: "white",
-    paddingHorizontal: 16,
+    paddingHorizontal: 8,
+  },
+  mainView: {
+    flexDirection: "row",
+    gap: 10,
+    marginBottom: 8,
+    alignItems: "center"
+  },
+  hintInfo: {
+    borderBottomColor: "white",
+    flexDirection: "row",
+    gap: 4,
   },
   topView: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  hitn: {
+    color: "grey",
+    fontSize: 12,
   },
 });
 
