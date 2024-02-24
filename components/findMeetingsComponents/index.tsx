@@ -16,7 +16,7 @@ const Meetings = () => {
 
     const meetingsComponent = context.meetings?.map?.(m => <FindMeetingsMeeting key={m.meetingId} meeting={m}/>)
     return <View>
-        <Text style={{paddingHorizontal: 16}}>Find meetings</Text>
+        <Text style={{ fontSize: 25, paddingHorizontal: 5}}>Find meetings</Text>
         {meetingsComponent}
     </View>
 }
