@@ -22,7 +22,6 @@ const Meetings = () => {
   const meetingsComponent = context.meetings?.map?.((m) => <Text key={m.meetingId}>{m.meetingTitle}</Text>);
   return (
     <View>
-      <Text style={{ fontSize: 25, paddingHorizontal: 5}}>Owned Meetings</Text>
       {meetingsComponent}
     </View>
   );

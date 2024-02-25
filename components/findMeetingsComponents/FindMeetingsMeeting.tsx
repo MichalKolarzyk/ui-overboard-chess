@@ -1,4 +1,4 @@
-import { FindMeetingsResponse } from "../../hooks/overboardApiHooks/models/FindMeetingsModels";
+import { FindMeetingsResponse } from "../../hooks/overboardApiHooks/models/MeetingsModels";
 import { StyleSheet, Pressable, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
 
 export class FindMeetingsMeetingProps {
   meeting: FindMeetingsResponse;
+  onPress?: () => void;
 }
 
 export default FindMeetingsMeeting;

@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import { useApiClient } from "../apiClientHooks";
 import { useSession } from "../sessionHooks";
-import { FindMeetingsResponse } from "./models/FindMeetingsModels";
+import { FindMeetingsResponse, GetMeetingResponse } from "./models/MeetingsModels";
 import { UserOwnerMeetingResponse } from "./models/UserOwnerMeetingsModels";
 import { CreateMeetingRequest } from "./models/CreateMeetingModels";
 
@@ -14,8 +14,12 @@ export const useOverboardChessApi = () =>{
         timeout: 10000,
     })
     
-    const findMeetings = async () : Promise<AxiosResponse<FindMeetingsResponse[], any>> => {
-        return await apiClient.get<Array<FindMeetingsResponse>>("/api/Meeting/FindMeetings");
+    const findMeetings = async (skip: number = 0, take: number = 5) : Promise<AxiosResponse<FindMeetingsResponse[], any>> => {
+        return await apiClient.get<Array<FindMeetingsResponse>>(`/api/Meeting/FindMeetings?skip=${skip}&take=${take}`);
+    }
+
+    const getMeeting = async (meetingId: string) : Promise<AxiosResponse<GetMeetingResponse>> => {
+        return await apiClient.get<GetMeetingResponse>(`/api/Meeting/${meetingId}`);
     }
 
     const getUserOwnerMeetings = async () : Promise<AxiosResponse<UserOwnerMeetingResponse[], any>> => {
@@ -26,5 +30,10 @@ export const useOverboardChessApi = () =>{
         return await apiClient.post("/api/Meeting", request)
     }
 
-    return {findMeetings, getUserOwnerMeetings, createMeeting}
+    return {
+        findMeetings, 
+        getMeeting, 
+        getUserOwnerMeetings, 
+        createMeeting
+    }
 }

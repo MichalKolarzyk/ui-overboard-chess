@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FindMeetingsResponse } from "../../hooks/overboardApiHooks/models/FindMeetingsModels";
+import { FindMeetingsResponse } from "../../hooks/overboardApiHooks/models/MeetingsModels";
 import { useOverboardChessApi } from "../../hooks/overboardApiHooks";
 import { UserOwnerMeetingResponse } from "../../hooks/overboardApiHooks/models/UserOwnerMeetingsModels";
 

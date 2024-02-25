@@ -14,15 +14,14 @@ const Form = () => {
 
     return <View>
         <Text>Meeting title</Text>
-        <TextInput value={context.title} onChangeText={context.setTitle}/>
+        <TextInput editable={!context.isLoading} value={context.title} onChangeText={context.setTitle}/>
+        <Text style={{color: 'red'}}>{context.titleError}</Text>
     </View>
 }
 
 const Submit = () => {
     const context = useCreateMeetingContext();
-
-
-    return <Button onPress={context.create} title="Create"/>
+    return <Button disabled={!context.canCreate || context.isLoading} onPress={context.create} title="Create"/>
 }
 
 export const CreateMeeting = {Main, Form, Submit}

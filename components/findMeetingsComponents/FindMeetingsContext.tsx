@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FindMeetingsResponse } from "../../hooks/overboardApiHooks/models/FindMeetingsModels";
+import { FindMeetingsResponse } from "../../hooks/overboardApiHooks/models/MeetingsModels";
 import { useOverboardChessApi } from "../../hooks/overboardApiHooks";
 
 export class FindMeetingsState{
@@ -11,7 +11,7 @@ export const FindMeetingsContext = React.createContext<FindMeetingsState>(new Fi
 
 export const useFindMeetingsContext = () => React.useContext(FindMeetingsContext);
 
-export const FindMeetingsProvider = () : FindMeetingsState => {
+export const FindMeetingsProvider = (take: number) : FindMeetingsState => {
     const [isLoading, setIsLoading] = useState(false);
     const [meetings, setMeetings] = useState<Array<FindMeetingsResponse>>([]);
 
@@ -20,7 +20,7 @@ export const FindMeetingsProvider = () : FindMeetingsState => {
     useEffect(() => {
         const fetchMeetings = async () => {
             setIsLoading(true);
-            const meetingsResponse = await overboardApi.findMeetings();
+            const meetingsResponse = await overboardApi.findMeetings(0, take);
             setMeetings(meetingsResponse.data)
             setIsLoading(false);
         }

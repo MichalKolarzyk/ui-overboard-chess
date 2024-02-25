@@ -1,20 +1,55 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, StyleSheet, Text } from "react-native";
 import FindMeetings from "../../components/findMeetingsComponents";
-import { PageStyles } from "../../styles";
-import { UserOwnerMeetingsContext } from "../../components/userOwnerMeetingsComponents/UserOwnerMeetingsContext";
 import UserOwnerMeetings from "../../components/userOwnerMeetingsComponents";
+import { Link } from "expo-router";
 
 const FindMeetingsPage = () => {
   return (
-    <ScrollView>
-      <UserOwnerMeetings.Main>
-        <UserOwnerMeetings.Meetings />
-      </UserOwnerMeetings.Main>
-      <FindMeetings.Main>
-        <FindMeetings.Meetings />
-      </FindMeetings.Main>
+    <ScrollView style={{flexDirection: "column", gap: 5}}>
+      <View style={styles.section}>
+      <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>My meetings</Text>
+          <Link style={styles.sectionLink} href={""}>see all</Link>
+        </View>
+        <UserOwnerMeetings.Main>
+          <UserOwnerMeetings.Meetings />
+        </UserOwnerMeetings.Main>
+      </View>
+      <View style={styles.section}>
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Find new</Text>
+          <Link style={styles.sectionLink} href={""}>see all</Link>
+        </View>
+        <FindMeetings.Main maxItems={5}>
+          <FindMeetings.Meetings />
+        </FindMeetings.Main>
+      </View>
     </ScrollView>
   );
 };
 
+const styles = StyleSheet.create({
+  section: {
+    backgroundColor: "#282828",
+    marginBottom: 20,
+    borderRadius: 10,
+    paddingTop: 10,
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 10,
+    alignItems: "center",
+    paddingHorizontal: 10,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  sectionLink: {
+    fontSize: 16,
+    color: "blue",
+    textDecorationLine: "underline",
+  },
+});
 export default FindMeetingsPage;

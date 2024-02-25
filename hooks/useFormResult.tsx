@@ -18,10 +18,15 @@ export const useFormResult = () => {
         setErrors([]);
     }
 
+    const findErrorMessage = (field: string) : string | null => {
+        return errors.find(e => e.field === field)?.message;
+    }
+
     return {
         isValid,
         addError,
         clear,
+        findErrorMessage
     }
 }
 

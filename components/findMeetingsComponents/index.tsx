@@ -2,8 +2,8 @@ import { FindMeetingsContext, FindMeetingsProvider, useFindMeetingsContext } fro
 import {ActivityIndicator, Text, View} from "react-native"
 import FindMeetingsMeeting from "./FindMeetingsMeeting"
 
-const Main = (props: any) => {
-    return <FindMeetingsContext.Provider value={FindMeetingsProvider()}>
+const Main = (props: FindMeetingsProps) => {
+    return <FindMeetingsContext.Provider value={FindMeetingsProvider(props.maxItems ?? 5)}>
         {props.children}
     </FindMeetingsContext.Provider>
 }
@@ -14,12 +14,16 @@ const Meetings = () => {
         return <ActivityIndicator size="large"/>
     }
 
-    const meetingsComponent = context.meetings?.map?.(m => <FindMeetingsMeeting key={m.meetingId} meeting={m}/>)
+    const meetingsComponent = context.meetings?.map?.(m => <FindMeetingsMeeting onPress={() => {}} key={m.meetingId} meeting={m}/>)
     return <View>
-        <Text style={{ fontSize: 25, paddingHorizontal: 5}}>Find meetings</Text>
         {meetingsComponent}
     </View>
 }
 
 const FindMeetings = {Main, Meetings}
 export default FindMeetings
+
+export interface FindMeetingsProps{
+    maxItems?: number,
+    children?: any,
+}
