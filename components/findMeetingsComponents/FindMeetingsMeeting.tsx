@@ -12,7 +12,7 @@ const FindMeetingsMeeting = (props: FindMeetingsMeetingProps) => {
         },
         styles.container,
       ]}
-      onPress={() => {}}
+      onPress={props.onPress}
     >
       <View style={styles.mainView}>
         <MaterialIcons name="location-on" size={30} color="white" />

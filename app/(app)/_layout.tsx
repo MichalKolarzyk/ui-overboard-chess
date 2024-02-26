@@ -15,9 +15,10 @@ export default function Layout() {
   return (
     <Tabs>
       <Tabs.Screen
-        name="index"
+        name="(home)"
         options={{
-          title: "Dashboard",
+          title: "Home",
+          headerShown: false,
           tabBarIcon: ({ focused, color, size }) => <AntDesign name="home" size={size} color={color} />,
         }}
       />

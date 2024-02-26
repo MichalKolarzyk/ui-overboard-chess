@@ -11,7 +11,7 @@ const Home = () => {
 
     const login = async (request: LoginRequest) => {
         await session.login(request);
-        router.replace('/');
+        router.replace('');
     }
 
     return <View style={styles.container}>

@@ -1,7 +1,7 @@
 import { ScrollView, View, StyleSheet, Text } from "react-native";
-import FindMeetings from "../../components/findMeetingsComponents";
-import UserOwnerMeetings from "../../components/userOwnerMeetingsComponents";
-import { Link } from "expo-router";
+import FindMeetings from "../../../components/findMeetingsComponents";
+import UserOwnerMeetings from "../../../components/userOwnerMeetingsComponents";
+import { Link, router } from "expo-router";
 
 const FindMeetingsPage = () => {
   return (
@@ -21,7 +21,7 @@ const FindMeetingsPage = () => {
           <Link style={styles.sectionLink} href={""}>see all</Link>
         </View>
         <FindMeetings.Main maxItems={5}>
-          <FindMeetings.Meetings />
+          <FindMeetings.Meetings onPress={(meetingId) => router.push(`(home)/${meetingId}`)} />
         </FindMeetings.Main>
       </View>
     </ScrollView>
