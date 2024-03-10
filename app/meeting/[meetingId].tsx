@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from "expo-router/src/hooks"
 import { View, Text } from "react-native";
-import Meeting from "../../../components/meetingComponents";
+import Meeting from "../../components/meetingComponents";
 
 const MeetingPage = () => {
     const {meetingId} = useLocalSearchParams();

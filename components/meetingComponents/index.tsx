@@ -23,12 +23,12 @@ const Informations = () => {
 
 const Join = () => {
     const context = useMeetingsContext();
-    return <Button disabled={!context.meeting?.canJoin ?? false} title="Join"/>
+    return <Button onPress={context.joinMeeting} disabled={!context.meeting?.canJoin ?? false} title="Join"/>
 }
 
 const Delete = () => {
     const context = useMeetingsContext();
-    return <Button disabled={!context.meeting?.canRemove ?? false} title="Remove"/>
+    return <Button onPress={context.deleteMeeting} disabled={!context.meeting?.canRemove ?? false} title="Remove"/>
 }
 
 const Meeting = {Main, Informations, Join, Delete}

@@ -5,6 +5,8 @@ import { GetMeetingResponse } from "../../hooks/overboardApiHooks/models/Meeting
 export class MeetingState{
     isLoading: boolean;
     meeting: GetMeetingResponse;
+    joinMeeting: () => void;
+    deleteMeeting: () => void;
 }
 
 export const MeetingsContext = React.createContext<MeetingState>(new MeetingState())
@@ -17,18 +19,38 @@ export const MeetingsProvider = (meetingId: string) : MeetingState => {
     
     const overboardChessApi = useOverboardChessApi();
 
+    const joinMeeting = async () => {
+        setIsLoading(true);
+        await overboardChessApi.joinMeeting(meeting.id);
+        await fetchMeeting();
+        setIsLoading(false);
+    }
+
+    const deleteMeeting = async () => {
+        setIsLoading(true);
+        await overboardChessApi.deleteMeeting(meeting.id);
+        setIsLoading(false);
+    }
+
     useEffect(() => {
-        const fetchMeeting = async () => {
+        const featchMeetingEffect = async () => {
             setIsLoading(true);
-            const meetingResponse = await overboardChessApi.getMeeting(meetingId);
-            setMeeting(meetingResponse.data);
+            await fetchMeeting();
             setIsLoading(false);
         }
-        fetchMeeting();
+
+        featchMeetingEffect();
     },[])
+
+    const fetchMeeting = async () => {
+        const meetingResponse = await overboardChessApi.getMeeting(meetingId)
+        setMeeting(meetingResponse.data);
+    }
 
     return{
         isLoading,
         meeting,
+        joinMeeting, 
+        deleteMeeting,
     }
 }

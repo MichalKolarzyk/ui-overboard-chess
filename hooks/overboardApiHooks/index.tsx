@@ -30,10 +30,20 @@ export const useOverboardChessApi = () =>{
         return await apiClient.post("/api/Meeting", request)
     }
 
+    const joinMeeting = async(meetingId: string) : Promise<AxiosResponse> => {
+        return await apiClient.post(`/api/Meeting/${meetingId}/join`);
+    }
+
+    const deleteMeeting = async(meetingId: string) : Promise<AxiosResponse> => {
+        return await apiClient.delete(`/api/Meeting/${meetingId}/delete`);
+    } 
+
     return {
         findMeetings, 
         getMeeting, 
         getUserOwnerMeetings, 
-        createMeeting
+        createMeeting,
+        joinMeeting,
+        deleteMeeting
     }
 }

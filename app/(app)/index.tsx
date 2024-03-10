@@ -1,27 +1,31 @@
 import { ScrollView, View, StyleSheet, Text } from "react-native";
-import FindMeetings from "../../../components/findMeetingsComponents";
-import UserOwnerMeetings from "../../../components/userOwnerMeetingsComponents";
+import FindMeetings from "../../components/findMeetingsComponents";
+import UserOwnerMeetings from "../../components/userOwnerMeetingsComponents";
 import { Link, router } from "expo-router";
 
 const FindMeetingsPage = () => {
   return (
-    <ScrollView style={{flexDirection: "column", gap: 5}}>
+    <ScrollView style={{ flexDirection: "column", gap: 5 }}>
       <View style={styles.section}>
-      <View style={styles.sectionHeader}>
+        <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>My meetings</Text>
-          <Link style={styles.sectionLink} href={""}>see all</Link>
+          <Link style={styles.sectionLink} href={""}>
+            see all
+          </Link>
         </View>
         <UserOwnerMeetings.Main>
-          <UserOwnerMeetings.Meetings />
+          <UserOwnerMeetings.Meetings onPress={(meetingId) => router.push(`meeting/${meetingId}`)} />
         </UserOwnerMeetings.Main>
       </View>
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Find new</Text>
-          <Link style={styles.sectionLink} href={""}>see all</Link>
+          <Link style={styles.sectionLink} href={""}>
+            see all
+          </Link>
         </View>
-        <FindMeetings.Main maxItems={5}>
-          <FindMeetings.Meetings onPress={(meetingId) => router.push(`(home)/${meetingId}`)} />
+        <FindMeetings.Main maxItems={10}>
+          <FindMeetings.Meetings onPress={(meetingId) => router.push(`meeting/${meetingId}`)} />
         </FindMeetings.Main>
       </View>
     </ScrollView>

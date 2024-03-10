@@ -1,9 +1,10 @@
+import { View, Text, ActivityIndicator, StyleSheet, Pressable } from "react-native";
 import { FindMeetingsResponse } from "../../hooks/overboardApiHooks/models/MeetingsModels";
-import { StyleSheet, Pressable, Text, View } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
 import { DateViewModel } from "../../models/DateViewModel";
+import { Fontisto } from "@expo/vector-icons";
 
-const FindMeetingsMeeting = (props: FindMeetingsMeetingProps) => {
+const UserOwnerMeeting = (props: UserOwnerMeetingProps) => {
+  const meeting = props.meeting;
   const date = new DateViewModel(props.meeting.meetingStartDate);
   return (
     <Pressable
@@ -16,18 +17,12 @@ const FindMeetingsMeeting = (props: FindMeetingsMeetingProps) => {
       onPress={props.onPress}
     >
       <View style={styles.mainView}>
-        <MaterialIcons name="location-on" size={30} color="white" />
-        <View style={{flexGrow: 1, gap: 15}}>
+        <Fontisto name="favorite" size={30} color="black" />
+        <View style={{ flexGrow: 1, gap: 15 }}>
           <View style={styles.topView}>
             <View style={styles.hintInfo}>
-              <Text style={styles.hitn}>owner:</Text>
-              <Text>{props?.meeting?.userOwnerName}</Text>
-            </View>
-            <View style={styles.hintInfo}>
               <Text style={styles.hitn}>in days:</Text>
-              <Text>
-                {date.getDate()}
-              </Text>
+              <Text>{date.getDate()}</Text>
             </View>
             <View style={styles.hintInfo}>
               <Text style={styles.hitn}>at:</Text>
@@ -37,7 +32,7 @@ const FindMeetingsMeeting = (props: FindMeetingsMeetingProps) => {
             </View>
           </View>
           <View style={styles.topView}>
-            <Text style={{fontStyle: "italic"}}>{props?.meeting?.meetingTitle}</Text>
+            <Text style={{ fontStyle: "italic" }}>{props?.meeting?.meetingTitle}</Text>
           </View>
         </View>
       </View>
@@ -54,9 +49,9 @@ const styles = StyleSheet.create({
   },
   mainView: {
     flexDirection: "row",
-    gap: 10,
+    gap: 20,
     marginBottom: 8,
-    alignItems: "center"
+    alignItems: "center",
   },
   hintInfo: {
     borderBottomColor: "white",
@@ -73,9 +68,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export class FindMeetingsMeetingProps {
+export interface UserOwnerMeetingProps {
   meeting: FindMeetingsResponse;
-  onPress?: () => void;
+  onPress: () => void;
 }
 
-export default FindMeetingsMeeting;
+
+export default UserOwnerMeeting;
