@@ -2,10 +2,15 @@ import { View, Text, ActivityIndicator, StyleSheet, Pressable } from "react-nati
 import { FindMeetingsResponse } from "../../hooks/overboardApiHooks/models/MeetingsModels";
 import { DateViewModel } from "../../models/DateViewModel";
 import { Fontisto } from "@expo/vector-icons";
+import { TextViewModel } from "../../models/TextViewModel";
 
 const UserOwnerMeeting = (props: UserOwnerMeetingProps) => {
   const meeting = props.meeting;
-  const date = new DateViewModel(props.meeting.meetingStartDate);
+  const date = DateViewModel.FromString(props.meeting.meetingStartDate);
+
+  const meetingTitle = new TextViewModel(props?.meeting?.meetingTitle, 45);
+  
+
   return (
     <Pressable
       style={({ pressed }) => [
@@ -17,7 +22,7 @@ const UserOwnerMeeting = (props: UserOwnerMeetingProps) => {
       onPress={props.onPress}
     >
       <View style={styles.mainView}>
-        <Fontisto name="favorite" size={30} color="black" />
+        <Fontisto name="favorite" size={30} color="gold" />
         <View style={{ flexGrow: 1, gap: 15 }}>
           <View style={styles.topView}>
             <View style={styles.hintInfo}>
@@ -32,7 +37,7 @@ const UserOwnerMeeting = (props: UserOwnerMeetingProps) => {
             </View>
           </View>
           <View style={styles.topView}>
-            <Text style={{ fontStyle: "italic" }}>{props?.meeting?.meetingTitle}</Text>
+            <Text style={{ fontStyle: "italic" }}>{meetingTitle.ToString()}</Text>
           </View>
         </View>
       </View>

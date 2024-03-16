@@ -4,7 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { DateViewModel } from "../../models/DateViewModel";
 
 const FindMeetingsMeeting = (props: FindMeetingsMeetingProps) => {
-  const date = new DateViewModel(props.meeting.meetingStartDate);
+  const date = DateViewModel.FromString(props.meeting.meetingStartDate);
   return (
     <Pressable
       style={({ pressed }) => [

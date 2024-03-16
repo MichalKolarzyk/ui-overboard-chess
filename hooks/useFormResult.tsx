@@ -18,6 +18,13 @@ export const useFormResult = () => {
         setErrors([]);
     }
 
+    const clearField = (field: string) => {
+        setErrors(prevState => {
+            const newErrors = prevState.filter(e => e.field !== field)
+            return [...newErrors];
+        })
+    }
+
     const findErrorMessage = (field: string) : string | null => {
         return errors.find(e => e.field === field)?.message;
     }
@@ -26,6 +33,7 @@ export const useFormResult = () => {
         isValid,
         addError,
         clear,
+        clearField,
         findErrorMessage
     }
 }

@@ -32,16 +32,15 @@ export const CreateMeetingProvider = () : CreateMeetingState => {
     const overboardChessApi = useOverboardChessApi();
 
     useEffect(() => {
-        formResult.clear();
-        if(title === null || title.length === 0){
-            formResult.addError({
-                field: "title",
-                message: "title cannot be empty",
-            })
-        }
-    }, [title, start, durationHours, durationMinutes])
+        formResult.clearField("title");
+    }, [title])
 
     const create = async () => {
+        const isValid = validateForm();
+        if(isValid === false){
+            return;
+        }
+
         setIsLoading(true);
         await overboardChessApi.createMeeting({
             durationHours: durationHours,
@@ -50,6 +49,24 @@ export const CreateMeetingProvider = () : CreateMeetingState => {
             title: title,
         })
         setIsLoading(false);
+        setDefaultValues();
+    }
+
+    const validateForm = () : boolean => {
+        formResult.clear();
+        if(title === null || title.length === 0){
+            formResult.addError({
+                field: "title",
+                message: "title cannot be empty",
+            })
+        }
+
+        return formResult.isValid();
+    }
+
+    const setDefaultValues = () => {
+        setTitle("");
+        setStart(new Date(Date.now()));
     }
 
     return {

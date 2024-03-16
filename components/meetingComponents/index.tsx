@@ -3,16 +3,29 @@ import { MeetingsContext, MeetingsProvider, useMeetingsContext } from "./Meeting
 
 const Main = (props: MeetingsProps) => {
     return <MeetingsContext.Provider value={MeetingsProvider(props.meetingId)}>
-        {props.children}
+        <Loader>
+            {props.children}
+        </Loader>
     </MeetingsContext.Provider>
 }
 
-const Informations = () => {
+const Loader = (props: any) => {
     const context = useMeetingsContext();
     if(context.isLoading){
         return <ActivityIndicator size="large"/>
     }
 
+    if(context.meeting === null){
+        return <View>
+            <Text>Meeting not found, probably meeting was removed by a owner</Text>
+        </View>
+    }
+
+    return props.children
+}
+
+const Informations = () => {
+    const context = useMeetingsContext();
     return <View>
         <Text>{context.meeting?.title ?? ""}</Text>
         <Text>{context.meeting?.description ?? ""}</Text>

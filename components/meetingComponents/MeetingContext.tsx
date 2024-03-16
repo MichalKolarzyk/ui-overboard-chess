@@ -30,6 +30,7 @@ export const MeetingsProvider = (meetingId: string) : MeetingState => {
         setIsLoading(true);
         await overboardChessApi.deleteMeeting(meeting.id);
         setIsLoading(false);
+        setMeeting(null);
     }
 
     useEffect(() => {
@@ -43,8 +44,9 @@ export const MeetingsProvider = (meetingId: string) : MeetingState => {
     },[])
 
     const fetchMeeting = async () => {
-        const meetingResponse = await overboardChessApi.getMeeting(meetingId)
-        setMeeting(meetingResponse.data);
+        await overboardChessApi.getMeeting(meetingId)
+            .then(response => setMeeting(response.data))
+            .catch(() => setMeeting(null))
     }
 
     return{
