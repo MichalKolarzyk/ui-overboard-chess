@@ -1,8 +1,8 @@
 import { ActivityIndicator, View, Text, Button } from "react-native";
-import { MeetingsContext, MeetingsProvider, useMeetingsContext } from "./MeetingContext";
+import { MeetingEvent, MeetingsContext, MeetingsProvider, useMeetingsContext } from "./MeetingContext";
 
 const Main = (props: MeetingsProps) => {
-    return <MeetingsContext.Provider value={MeetingsProvider(props.meetingId)}>
+    return <MeetingsContext.Provider value={MeetingsProvider(props.meetingId, props.onEvent)}>
         <Loader>
             {props.children}
         </Loader>
@@ -50,4 +50,5 @@ export default Meeting
 export interface MeetingsProps{
     meetingId: string,
     children?: any,
+    onEvent?: (event: MeetingEvent) => void
 }

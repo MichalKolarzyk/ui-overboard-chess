@@ -1,6 +1,7 @@
-import { TextInput, Text, View, Button,StyleSheet } from "react-native";
+import { TextInput, Text, View, Button, StyleSheet } from "react-native";
 import { CreateMeetingContext, CreateMeetingProvider, useCreateMeetingContext } from "./CreateMeetingContext";
-import { DateInput, TimeInput } from "../baseComponents";
+import { DateInput, NumberInput, StringInput, TimeInput } from "../baseComponents";
+import { colors } from "../../constants";
 
 const Main = (props: any) => {
   return (
@@ -12,14 +13,28 @@ const Form = () => {
   const context = useCreateMeetingContext();
 
   return (
-    <View>
-      <Text>Title</Text>
-      <TextInput editable={!context.isLoading} value={context.title} onChangeText={context.setTitle} />
-      <Text style={{ color: "red" }}>{context.titleError}</Text>
-      <Text>Start</Text>
-      <DateInput date={context.start} setDate={context.setStart}/>
-      <Text>At</Text>
-      <TimeInput date={context.start} setDate={context.setStart}/>
+    <View style={styles.container}>
+      <View>
+        <Text>Title</Text>
+        <StringInput value={context.title} setValue={context.setTitle} />
+        <Text style={{ color: colors.formError }}>{context.titleError}</Text>
+      </View>
+      <View>
+        <Text>Start</Text>
+        <DateInput date={context.start} setDate={context.setStart} />
+      </View>
+      <View>
+        <Text>At</Text>
+        <TimeInput date={context.start} setDate={context.setStart} />
+      </View>
+      <View>
+        <Text>Duration</Text>
+        <View style={styles.hoursMinutesContainer}>
+          <NumberInput value={context.durationHours} setValue={context.setDurationHours} />
+          <Text>:</Text>
+          <NumberInput value={context.durationMinutes} setValue={context.setDurationMinutes} />
+        </View>
+      </View>
     </View>
   );
 };
@@ -32,11 +47,16 @@ const Submit = () => {
 export const CreateMeeting = { Main, Form, Submit };
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
-    map: {
-      width: '100%',
-      height: '100%',
-    },
-  });
+  container: {
+    gap: 10,
+  },
+  map: {
+    width: "100%",
+    height: "100%",
+  },
+  hoursMinutesContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+});
