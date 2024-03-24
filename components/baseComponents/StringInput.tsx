@@ -1,10 +1,11 @@
 import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
+import { IDisabled } from "./BaseProps";
 
 const StringInput = (props: StringInputProps) => {
   return (
     <View style={styles.container}>
-        <TextInput style={styles.text} value={props.value} onChangeText={props.setValue}/>
+        <TextInput editable={!props.disabled} style={styles.text} value={props.value} onChangeText={props.setValue}/>
     </View>
   );
 };
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
-export interface StringInputProps {
+export interface StringInputProps extends IDisabled {
   value: string,
   setValue: (newValue: string) => void,
 }

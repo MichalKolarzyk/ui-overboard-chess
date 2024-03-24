@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { LoginRequest } from "./models/LoginRequest";
 import { useApiClient } from "../apiClientHooks";
 import { useSecureStore } from "../storeHooks/useSecureStore";
+import { LoginWithEmailRequest as ConfirmEmailRequest } from "./models/LoginWithEmailRequest";
 
 export class SessionState {
     isLogin: () => boolean
     login: (request: LoginRequest) => Promise<void>
+    loginWithEmail: (email: string) => Promise<void>
+    confirmEmail: (request: ConfirmEmailRequest) => Promise<void>
     logout: () => void
     isLoading: boolean
     bearerToken: string
@@ -43,8 +46,26 @@ export const SessionStateProvider = () : SessionState => {
         setIsLoading(false);
     }
 
-    const logout = () => {
+    const loginWithEmail = async (email: string) : Promise<void> => {
+        setIsLoading(true);
+        await apiClient.post("/api/user/loginWithEmail", {email});
+        setIsLoading(false);
+    }
+    
+    const confirmEmail = async (request: ConfirmEmailRequest) : Promise<void> => {
+        setIsLoading(true);
+        const token = await apiClient.post<string>("/api/user/confirmEmail", request)
+        console.log(token);
+        setOverboardApiToken(token?.data);
+        await secureStore.set(tokenKey, token?.data)
+        setIsLoading(false);
+    }
+
+    const logout = async () => {
+        setIsLoading(true);
         setOverboardApiToken("");
+        await secureStore.set(tokenKey, "")
+            .finally(() => setIsLoading(false))
     }
 
     const isLogin = () => {
@@ -53,6 +74,8 @@ export const SessionStateProvider = () : SessionState => {
 
     return{
         login,
+        loginWithEmail,
+        confirmEmail,
         isLogin,
         logout,
         isLoading,

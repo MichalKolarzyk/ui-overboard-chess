@@ -9,7 +9,7 @@ export default function Layout() {
   if (session.isLoading) return <ActivityIndicator />;
 
   if (!session.isLogin()) {
-    return <Redirect href={"/Login"} />;
+    return <Redirect href={"/LoginWithEmail"} />;
   }
 
   return (
