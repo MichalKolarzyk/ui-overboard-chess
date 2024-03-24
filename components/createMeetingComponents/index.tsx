@@ -22,6 +22,7 @@ const Form = () => {
       <View>
         <Text>Start</Text>
         <DateInput date={context.start} setDate={context.setStart} />
+        <Text style={{ color: colors.formError }}>{context.startError}</Text>
       </View>
       <View>
         <Text>At</Text>

@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { useState } from "react";
 
 export const useFormResult = () => {
@@ -29,12 +30,22 @@ export const useFormResult = () => {
         return errors.find(e => e.field === field)?.message;
     }
 
+    const fromAxiosError = (axiosError: AxiosError) => {
+        clear();
+        const data = axiosError.response.data as any;
+        const errors = data.errors as any;
+        for(var fieldName in errors){
+            addError({field: fieldName, message: errors[fieldName][0]})
+        }
+    }
+
     return {
         isValid,
         addError,
         clear,
         clearField,
-        findErrorMessage
+        findErrorMessage,
+        fromAxiosError
     }
 }
 

@@ -1,6 +1,5 @@
 import {  useRouter } from "expo-router";
 import { View,  Button, StyleSheet } from "react-native"
-import LinkButton from "../components/baseComponents/LinkButton";
 import { useSession } from "../hooks/sessionHooks";
 import { LoginRequest } from "../hooks/sessionHooks/models/LoginRequest";
 

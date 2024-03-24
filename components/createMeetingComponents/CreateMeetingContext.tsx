@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useOverboardChessApi } from "../../hooks/overboardApiHooks";
 import { useFormResult } from "../../hooks/useFormResult";
 
@@ -9,6 +9,7 @@ export class CreateMeetingState{
     titleError: string | null;
     start: Date;
     setStart: (value: Date) => void;
+    startError: string | null;
     durationHours: number;
     setDurationHours: (value: number) => void;
     durationMinutes: number;
@@ -22,8 +23,8 @@ export const CreateMeetingContext = React.createContext<CreateMeetingState>(new 
 export const useCreateMeetingContext = () => React.useContext(CreateMeetingContext);
 
 export const CreateMeetingProvider = () : CreateMeetingState => {
-    const [title, setTitle] = useState("");
-    const [start, setStart] = useState<Date>(new Date(Date.now()));
+    const [title, _setTitle] = useState("");
+    const [start, _setStart] = useState<Date>(new Date(Date.now()));
     const [isLoading, setIsLoading] = useState(false);
     const [durationHours, setDurationHours] = useState(2);
     const [durationMinutes, setDurationMinutes] = useState(30);    
@@ -31,16 +32,17 @@ export const CreateMeetingProvider = () : CreateMeetingState => {
     const formResult = useFormResult();
     const overboardChessApi = useOverboardChessApi();
 
-    useEffect(() => {
+    const setTitle = (value: string) => {
+        _setTitle(value);
         formResult.clearField("title");
-    }, [title])
+    }
+
+    const setStart = (value: Date) => {
+        _setStart(value)
+        formResult.clearField("start")
+    }
 
     const create = async () => {
-        const isValid = validateForm();
-        if(isValid === false){
-            return;
-        }
-
         setIsLoading(true);
         await overboardChessApi.createMeeting({
             durationHours: durationHours,
@@ -48,25 +50,8 @@ export const CreateMeetingProvider = () : CreateMeetingState => {
             start: start.toISOString(),
             title: title,
         })
+        .catch(e => formResult.fromAxiosError(e))
         setIsLoading(false);
-        setDefaultValues();
-    }
-
-    const validateForm = () : boolean => {
-        formResult.clear();
-        if(title === null || title.length === 0){
-            formResult.addError({
-                field: "title",
-                message: "title cannot be empty",
-            })
-        }
-
-        return formResult.isValid();
-    }
-
-    const setDefaultValues = () => {
-        setTitle("");
-        setStart(new Date(Date.now()));
     }
 
     return {
@@ -76,6 +61,7 @@ export const CreateMeetingProvider = () : CreateMeetingState => {
         titleError: formResult.findErrorMessage("title"),
         start,
         setStart,
+        startError: formResult.findErrorMessage("start"),
         durationHours,
         setDurationHours,
         durationMinutes,
