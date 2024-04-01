@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useOverboardChessApi } from "../../hooks/overboardApiHooks";
 import { useFormResult } from "../../hooks/useFormResult";
+import { Double } from "react-native/Libraries/Types/CodegenTypes";
+import { LatLng } from "react-native-maps";
 
 export class CreateMeetingState{
     isLoading: boolean;
@@ -15,6 +17,8 @@ export class CreateMeetingState{
     durationMinutes: number;
     setDurationMinutes: (value: number) => void;
     canCreate: boolean;
+    coordinates: LatLng;
+    setCoordinates: (value: LatLng) => void;
     create: () => void;
 }
 
@@ -27,8 +31,10 @@ export const CreateMeetingProvider = () : CreateMeetingState => {
     const [start, _setStart] = useState<Date>(new Date(Date.now()));
     const [isLoading, setIsLoading] = useState(false);
     const [durationHours, setDurationHours] = useState(2);
-    const [durationMinutes, setDurationMinutes] = useState(30);    
+    const [durationMinutes, setDurationMinutes] = useState(30);
+    const [coordinates, setCoordinates] = useState<LatLng>();
     
+
     const formResult = useFormResult();
     const overboardChessApi = useOverboardChessApi();
 
@@ -49,6 +55,8 @@ export const CreateMeetingProvider = () : CreateMeetingState => {
             durationMinutes: durationMinutes,
             start: start.toISOString(),
             title: title,
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude,
         })
         .catch(e => formResult.fromAxiosError(e))
         setIsLoading(false);
@@ -66,6 +74,8 @@ export const CreateMeetingProvider = () : CreateMeetingState => {
         setDurationHours,
         durationMinutes,
         setDurationMinutes,
+        coordinates,
+        setCoordinates,
         create,
         canCreate: formResult.isValid(),
     } as CreateMeetingState

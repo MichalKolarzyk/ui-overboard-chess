@@ -2,27 +2,27 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { DateViewModel } from "../../models/DateViewModel";
-import { Fontisto } from '@expo/vector-icons';
+import { Fontisto } from "@expo/vector-icons";
 
 const DateInput = (props: DateInputProps) => {
   const [datePickerVisible, setDataPickerVisible] = useState(false);
 
   const dateView = new DateViewModel(props.date);
   const onDataChange = (event: DateTimePickerEvent, date: Date) => {
-    if (event.type == "set") {
-      props.setDate(date);
-    }
     setDataPickerVisible(false);
+    props.setDate(date);
   };
 
   return (
-    <Pressable style={styles.container} onPress={() => setDataPickerVisible(true)}>
-      <View style={styles.layout}>
-        <Text style={styles.text}>{dateView.getDate()}</Text>
-        <Fontisto name="date" size={24} color="#fff" />
-      </View>
-      {datePickerVisible && <DateTimePicker minimumDate={new Date(Date.now())} value={props.date} onChange={onDataChange} />}
-    </Pressable>
+    <View>
+      <Pressable style={styles.container} onPressIn={() => setDataPickerVisible(true)}>
+        <View style={styles.layout}>
+          <Text style={styles.text}>{dateView.getDate()}</Text>
+          <Fontisto name="date" size={24} color="#fff" />
+        </View>
+      </Pressable>
+      {datePickerVisible && <DateTimePicker disabled={true} minimumDate={new Date(Date.now())} value={props.date} onChange={onDataChange} />}
+    </View>
   );
 };
 
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   layout: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   text: {
     flexGrow: 1,

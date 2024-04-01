@@ -9,10 +9,8 @@ const TimeInput = (props: TimeInputProps) => {
 
   const dateView = new DateViewModel(props.date);
   const onDataChange = (event: DateTimePickerEvent, date: Date) => {
-    if (event.type == "set") {
-      props.setDate(date);
-    }
     setDataPickerVisible(false);
+    props.setDate(date);
   };
 
   return (

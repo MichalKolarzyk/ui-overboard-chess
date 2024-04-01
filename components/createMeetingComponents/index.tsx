@@ -1,7 +1,8 @@
-import { TextInput, Text, View, Button, StyleSheet } from "react-native";
+import { Text, View, Button, StyleSheet } from "react-native";
 import { CreateMeetingContext, CreateMeetingProvider, useCreateMeetingContext } from "./CreateMeetingContext";
 import { DateInput, NumberInput, StringInput, TimeInput } from "../baseComponents";
 import { colors } from "../../constants";
+import LocationPicker from "../baseComponents/LocationPicker";
 
 const Main = (props: any) => {
   return (
@@ -14,6 +15,7 @@ const Form = () => {
 
   return (
     <View style={styles.container}>
+      <LocationPicker coordinate={context.coordinates} setCoordinate={context.setCoordinates} />
       <View>
         <Text>Title</Text>
         <StringInput value={context.title} setValue={context.setTitle} />
@@ -50,10 +52,6 @@ export const CreateMeeting = { Main, Form, Submit };
 const styles = StyleSheet.create({
   container: {
     gap: 10,
-  },
-  map: {
-    width: "100%",
-    height: "100%",
   },
   hoursMinutesContainer: {
     flexDirection: "row",
