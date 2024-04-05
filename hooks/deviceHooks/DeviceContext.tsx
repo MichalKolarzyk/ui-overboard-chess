@@ -14,17 +14,18 @@ export const DeviceStateProvider = () : DeviceState => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        (async () => {
+        const saveLocation = async () => {
           setIsLoading(true);
           const { status } = await Location.requestForegroundPermissionsAsync();
           if (status !== "granted") {
             console.error("Permission to access location was denied");
             return;
           }
-    
           setLocation(await Location.getCurrentPositionAsync({}));
           setIsLoading(false);
-        })();
+        };
+
+        saveLocation();
       }, []);
 
 

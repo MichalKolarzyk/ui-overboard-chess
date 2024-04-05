@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import MapView, { LatLng, LongPressEvent, MapPressEvent, Marker } from "react-native-maps";
 import { useDevice } from "../../hooks/deviceHooks";
+import { colors } from "../../constants";
 
 const LocationPicker = (props: LocationPickerProps) => {
   const device = useDevice();
@@ -19,6 +20,7 @@ const LocationPicker = (props: LocationPickerProps) => {
       onLongPress={onLongPress}
       style={styles.map}>
         {props.coordinate != null && <Marker coordinate={props.coordinate} />}
+        <Marker style={{backgroundColor: "#5952b6"}} coordinate={device.location.coords}/>
       </MapView>
   );
 };

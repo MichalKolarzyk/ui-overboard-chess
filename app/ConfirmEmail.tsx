@@ -1,6 +1,5 @@
 import {  useRouter } from "expo-router";
-import { View,  Button, StyleSheet } from "react-native"
-import { useSession } from "../hooks/sessionHooks";
+import { View, StyleSheet } from "react-native"
 import LoginWithEmail from "../components/loginWithEmailComponents";
 
 
