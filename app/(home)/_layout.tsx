@@ -1,7 +1,8 @@
 import { Redirect, Tabs } from "expo-router";
-import { useSession } from "../../hooks/sessionHooks";
 import { ActivityIndicator } from "react-native";
 import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons";
+import { useSession } from "../../hooks/sessionHooks";
+import { AppLocation } from "../../hooks/useAppNavigation";
 
 export default function Layout() {
   const session = useSession();
@@ -9,7 +10,7 @@ export default function Layout() {
   if (session.isLoading) return <ActivityIndicator />;
 
   if (!session.isLogin()) {
-    return <Redirect href={"/LoginWithEmail"} />;
+    return <Redirect href={AppLocation.loginWithEmail.toString()} />;
   }
 
   return (

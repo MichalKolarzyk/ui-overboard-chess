@@ -1,9 +1,12 @@
 import { ScrollView, View, StyleSheet, Text } from "react-native";
 import FindMeetings from "../../components/findMeetingsComponents";
 import UserOwnerMeetings from "../../components/userOwnerMeetingsComponents";
-import { Link, router } from "expo-router";
+import { Link } from "expo-router";
+import useAppNavigation, { AppLocation } from "../../hooks/useAppNavigation";
 
 const FindMeetingsPage = () => {
+  const navigation = useAppNavigation();
+
   return (
     <ScrollView style={{ flexDirection: "column", gap: 5 }}>
       <View style={styles.section}>
@@ -14,7 +17,7 @@ const FindMeetingsPage = () => {
           </Link>
         </View>
         <UserOwnerMeetings.Main>
-          <UserOwnerMeetings.Meetings onPress={(meetingId) => router.push(`meeting/${meetingId}`)} />
+          <UserOwnerMeetings.Meetings onPress={(meetingId) => navigation.push(AppLocation.meeting(meetingId))} />
         </UserOwnerMeetings.Main>
       </View>
       <View style={styles.section}>
@@ -25,7 +28,7 @@ const FindMeetingsPage = () => {
           </Link>
         </View>
         <FindMeetings.Main maxItems={10}>
-          <FindMeetings.Meetings onPress={(meetingId) => router.push(`meeting/${meetingId}`)} />
+          <FindMeetings.Meetings onPress={(meetingId) => navigation.push(AppLocation.meeting(meetingId))} />
         </FindMeetings.Main>
       </View>
     </ScrollView>

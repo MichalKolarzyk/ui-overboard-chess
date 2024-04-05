@@ -1,16 +1,16 @@
-import {  useRouter } from "expo-router";
 import { View,  Button, StyleSheet } from "react-native"
-import { useSession } from "../hooks/sessionHooks";
-import { LoginRequest } from "../hooks/sessionHooks/models/LoginRequest";
+import { LoginRequest } from "../../hooks/sessionHooks/models/LoginRequest";
+import useAppNavigation, { AppLocation } from "../../hooks/useAppNavigation";
+import { useSession } from "../../hooks/sessionHooks";
 
 
 const Home = () => {
     const session = useSession();
-    const router = useRouter();
+    const navigation = useAppNavigation();
 
     const login = async (request: LoginRequest) => {
         await session.login(request);
-        router.replace('');
+        navigation.replace(AppLocation.home);
     }
 
     return <View style={styles.container}>

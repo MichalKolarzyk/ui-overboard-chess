@@ -1,14 +1,14 @@
-import {  useRouter } from "expo-router";
 import { View, StyleSheet } from "react-native"
-import LoginWithEmail from "../components/loginWithEmailComponents";
+import LoginWithEmail from "../../components/loginWithEmailComponents";
+import useAppNavigation, { AppLocation } from "../../hooks/useAppNavigation";
 
 
 
 const ConfirmEmail = () => {
-    const router = useRouter();
+    const router = useAppNavigation();
 
     return <View style={styles.container}>
-        <LoginWithEmail.ConfirmEmail afterConfirmEmail={() => router.replace("")} />
+        <LoginWithEmail.ConfirmEmail afterConfirmEmail={() => router.replace(AppLocation.home)} />
     </View>
 }
 
