@@ -3,6 +3,7 @@ import { CreateMeetingContext, CreateMeetingProvider, useCreateMeetingContext } 
 import { DateInput, NumberInput, StringInput, TimeInput } from "../baseComponents";
 import { colors } from "../../constants";
 import LocationPicker from "../baseComponents/LocationPicker";
+import FormOv from "../../baseComponents/forms";
 
 const Main = (props: any) => {
   return (
@@ -15,7 +16,11 @@ const Form = () => {
 
   return (
     <View style={styles.container}>
-      <LocationPicker coordinate={context.coordinates} setCoordinate={context.setCoordinates} />
+      {/* <LocationPicker coordinate={context.coordinates} setCoordinate={context.setCoordinates} /> */}
+      <FormOv>
+        <FormOv.Label>Title</FormOv.Label>
+        <FormOv.TextControll value={context.title} setValue={context.setTitle} />
+      </FormOv>
       <View>
         <Text>Title</Text>
         <StringInput value={context.title} setValue={context.setTitle} />

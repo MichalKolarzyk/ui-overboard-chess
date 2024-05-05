@@ -7,3 +7,12 @@ export const PageStyles = StyleSheet.create({
         gap: 20,
     }
 })
+
+export const MarginStyles = StyleSheet.create({
+    ms_auto: {
+       marginLeft: 'auto' 
+    },
+    me_auto: {
+        marginRight: 'auto' 
+     }
+})

@@ -1,14 +1,19 @@
-import { ScrollView, View, StyleSheet, Text } from "react-native";
+import { ScrollView, View, StyleSheet, Text, Button } from "react-native";
 import FindMeetings from "../../components/findMeetingsComponents";
 import UserOwnerMeetings from "../../components/userOwnerMeetingsComponents";
 import { Link } from "expo-router";
 import useAppNavigation, { AppLocation } from "../../hooks/useAppNavigation";
+import { ButtonOv } from "../../baseComponents/buttons";
 
 const FindMeetingsPage = () => {
   const navigation = useAppNavigation();
 
   return (
     <ScrollView style={{ flexDirection: "column", gap: 5 }}>
+      <ButtonOv title="Submit" variant="outline-primary" onPress={() => {}}/>
+      <ButtonOv title="Submit" variant="primary" onPress={() => {}}/>
+      <ButtonOv title="Submit" variant="outline-secondary" onPress={() => {}}/>
+      <ButtonOv title="Submit" variant="secondary" onPress={() => {}}/>
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>My meetings</Text>

@@ -5,10 +5,10 @@ import useAppNavigation, { AppLocation } from "../../hooks/useAppNavigation";
 
 
 const ConfirmEmail = () => {
-    const router = useAppNavigation();
+    const navigation = useAppNavigation();
 
     return <View style={styles.container}>
-        <LoginWithEmail.ConfirmEmail afterConfirmEmail={() => router.replace(AppLocation.home)} />
+        <LoginWithEmail.ConfirmEmail afterConfirmEmail={() => navigation.replace(AppLocation.home)} />
     </View>
 }
 

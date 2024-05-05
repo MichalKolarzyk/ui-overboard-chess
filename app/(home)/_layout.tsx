@@ -23,7 +23,7 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="CreateMeetingPage"
+        name="AddMeetingPage"
         options={{
           title: "Add meeting",
           tabBarIcon: ({ focused, color, size }) => <MaterialIcons name="add-location-alt" size={size} color={color} />,

@@ -32,7 +32,7 @@ export const CreateMeetingProvider = () : CreateMeetingState => {
     const [isLoading, setIsLoading] = useState(false);
     const [durationHours, setDurationHours] = useState(2);
     const [durationMinutes, setDurationMinutes] = useState(30);
-    const [coordinates, setCoordinates] = useState<LatLng>();
+    const [coordinates, setCoordinates] = useState<LatLng>({longitude: 18, latitude: 51});
     
 
     const formResult = useFormResult();
